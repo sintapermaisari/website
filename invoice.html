@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Invoice - Sinta Kosmetik</title>
+  <link rel="shortcut icon" href="img/logoya.png" type="image/png" />
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f08ab6;
+      margin: 0;
+      padding: 20px;
+      color: #000000;
+    }
+    .invoice-card {
+      max-width: 700px;
+      background: #f08ab6;
+      margin: 0 auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      padding: 30px 40px;
+    }
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 3px solid #000000;
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    .invoice-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: 3px;
+    }
+    .velteks {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #000000;
+      margin-top: 6px;
+    }
+    .logo {
+      height: 60px;
+      object-fit: contain;
+    }
+    .details {
+      margin-bottom: 25px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+    .details div {
+      margin-bottom: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+      font-size: 1rem;
+    }
+    thead tr {
+      background-color: #000000;
+      color: #f08ab6;
+    }
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #000000;
+      text-align: left;
+    }
+    tbody tr:hover {
+      background-color: #f9f9f9;
+    }
+    .bottom-section {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-bottom: 30px;
+    }
+    .left-column, .right-column {
+      flex: 1 1 300px;
+      margin-bottom: 15px;
+    }
+    .left-column p {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+    .right-column div {
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .right-column div strong {
+      color: #000000;
+    }
+    .right-column .total {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #000000;
+      border-top: 2px solid #000000;
+      padding-top: 10px;
+    }
+    .penerima-info {
+      background-color: #f86eaa;
+      border-radius: 8px;
+      padding: 20px;
+      font-size: 1rem;
+      margin-bottom: 30px;
+      line-height: 1.5;
+    }
+    .penerima-info strong {
+      color: #000000;
+    }
+    .thanks {
+      text-align: center;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+    /* Tombol */
+    .btn-container {
+      max-width: 700px;
+      margin: 0 auto;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-selesai {
+      background-color: #f08ab6;
+      color: black;
+      border: none;
+      padding: 20px 28px;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgb(255, 255, 255);
+      min-width: 300px;
+    }
+    .btn-selesai:hover {
+      background-color: #1a5fcc;
+      box-shadow: 0 6px 14px rgba(26,95,204,0.5);
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .invoice-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .bottom-section {
+        flex-direction: column;
+      }
+      .left-column, .right-column {
+        flex: 1 1 100%;
+      }
+      .btn-container {
+        flex-direction: column;
+      }
+      .btn-selesai {
+        width: 100%;
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+<body style="background-image: url(img/y.jpg);">
+
+  <div class="invoice-card">
+    <div class="invoice-header">
+      <div>
+        <div class="invoice-title">INVOICE</div>
+        <div class="velteks">Veloura Accessories</div>
+      </div>
+      <img src="img/logoya.png" alt="Logo Toko" class="logo" />
+    </div>
+
+    <div class="details">
+      <div><strong>Kepada:</strong> <span id="nama"></span></div>
+      <div><strong>Email:</strong> <span id="email"></span></div>
+      <div><strong>Tanggal:</strong> <span id="tanggal"></span></div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Nama Produk</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody id="keranjang-tabel"></tbody>
+    </table>
+
+    <div class="bottom-section">
+      <div class="left-column">
+        <p>Metode Pembayaran: <span id="metode">Belum dipilih</span></p>
+      </div>
+      <div class="right-column">
+        <div><strong>Sub Total:</strong> Rp <span id="sub-total">0</span></div>
+        <div><strong>Biaya Pengiriman:</strong> Rp 10.000</div>
+        <div class="total"><strong>Total:</strong> Rp <span id="total-bayar">0</span></div>
+      </div>
+    </div>
+
+    <div class="penerima-info">
+      <p><strong>Nama Penerima:</strong> <span id="nama-penerima">-</span></p>
+      <p><strong>Alamat Pengiriman:</strong></p>
+      <p id="alamat-penerima">-</p>
+    </div>
+
+    <div class="thanks">Terima kasih atas pembelian Anda!</div>
+  </div>
+
+  <!-- Tombol Selesai & Cetak -->
+  <div class="btn-container">
+    <button class="btn-selesai" onclick="selesaiHandler()">Selesai</button>
+    <button class="btn-selesai" onclick="window.open('cetak.html', '_blank')">Cetak</button>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Ambil metode pembayaran dari localStorage dan tampilkan
+    const metode = localStorage.getItem('metodePembayaran');
+    document.getElementById('metode').textContent = metode ?? 'Belum dipilih';
+  </script>
+</body>
+</html>

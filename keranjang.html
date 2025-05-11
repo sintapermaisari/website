@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Keranjang</title>
+  <link rel="shortcut icon" type="image" href="img/logoya.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style1.css">
+</head>
+<body style="background-image: url(img/y.jpg);">
+  
+  <div class="garis-tebal">
+    <a href="home.html" class="arrowsamping">
+      <i><img src="img/kembali.png" alt="Kembali" width="35px"></i>
+    </a>
+  </div>
+  
+  <center><h1 style="text-align: center; color: #000000; text-shadow: 10px 10px 10px black;">Keranjang Belanja</h1></center>
+<div id="daftar-keranjang"></div>
+
+<div class="nama">
+  <p><strong>Nama Penerima:</strong>
+    <input type="text" id="input-nama" name="nama" required>
+  </p>
+</div>
+
+<div class="alamat">
+  <p><strong>Alamat Pengiriman:</strong></p>
+  <textarea id="input-alamat" rows="3" style="width:100%;" required></textarea>
+</div>
+
+<div class="total-belanja">
+  <p>Biaya Pengiriman: Rp <span id="ongkir">10.000</span></p>
+  <p><strong><span id="total">0</span></strong></p>
+  <button class="pesanskrg-btn" onclick="simpanData()">Pesan Sekarang</button>
+  <br><br><br>
+</div>
+
+
+  
+  <div class="garis-tebal"></div>
+  
+<script src="script.js"></script>
+</body>
+</html>

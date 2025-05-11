@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Invoice</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap">
+  <link rel="shortcut icon" href="img/logoya.png" type="image/png" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background: #F6F6F6;
+      padding: 20px;
+    }
+    .invoice-card {
+      background: #f08ab6;
+      max-width: 600px;
+      margin: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      padding: 32px 24px;
+    }
+    .invoice-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #000000;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+    }
+    .invoice-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: 2px;
+    }
+    .logo {
+      height: 48px;
+    }
+    .details {
+      margin-bottom: 18px;
+      font-size: 1rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+    }
+    th, td {
+      padding: 12px 8px;
+      border-bottom: 1px solid #000000;
+      text-align: left;
+    }
+    th {
+      background: #000000;
+      color: #f08ab6;
+    }
+    .bottom-section {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+    .right-column {
+      text-align: right;
+    }
+    .right-column div {
+      margin-bottom: 6px;
+      font-size: 1.1em;
+    }
+    .total-highlight {
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #000000;
+    }
+    .penerima-info {
+      background: #f6549a;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+    }
+    .thanks {
+      text-align: center;
+      color: #000000;
+      font-weight: 600;
+      font-size: 1.1em;
+      margin-top: 18px;
+    }
+    @media (max-width: 600px) {
+      .invoice-card { padding: 16px 6px; }
+      .invoice-header { flex-direction: column; align-items: flex-start; }
+      .bottom-section { flex-direction: column; }
+      .right-column { text-align: left; }
+    }
+    .btn-selesai {
+      display: block;
+      margin: 30px auto 0 auto;
+      padding: 10px 26px;
+      background: #f08ab6;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-selesai:hover {
+      background: #f08ab6;
+    }
+    @media print {
+      .btn-selesai { display: none; }
+    }
+  </style>
+</head>
+<body style="background-image: url(img/y.jpg);">
+
+<div class="invoice-card">
+  <div class="invoice-header">
+    <div>
+      <div class="invoice-title">INVOICE</div>
+      <div style="font-size:1.1em;color:#000000;font-weight:600;">Sinta Kosmetik</div>
+    </div>
+    <img src="img/logoya.png" alt="Logo Toko" class="logo">
+  </div>
+
+  <div class="details">
+    <div><strong>Kepada:</strong> <span id="nama"></span></div>
+    <div><strong>Email:</strong> <span id="email"></span></div>
+    <div><strong>Tanggal:</strong> <span id="tanggal"></span></div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Nama Produk</th>
+        <th>Harga</th>
+        <th>Jumlah</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="keranjang-tabel"></tbody>
+  </table>
+
+  <div class="bottom-section">
+    <div>
+      <div>Metode Pembayaran: <span id="metode"></span></div>
+    </div>
+    <div class="right-column">
+      <div><strong>Sub Total:</strong> Rp <span id="sub-total">0</span></div>
+      <div><strong>Biaya Pengiriman:</strong> Rp 10.000</div>
+      <div class="total-highlight"><strong>Total:</strong> Rp <span id="total-bayar">0</span></div>
+    </div>
+  </div>
+
+  <div class="penerima-info">
+    <p><strong>Nama Penerima:</strong> <span id="nama-penerima">-</span></p>
+    <p><strong>Alamat Pengiriman:</strong></p>
+    <p id="alamat-penerima">-</p>
+  </div>
+
+  <div class="thanks">
+    Terima kasih atas pembelian Anda!
+  </div>
+</div>
+<button class="btn-selesai no-print" onclick="selesaiHandler1()">Selesai</button>
+
+<script src="script.js"></script>
+<script>
+const metode = localStorage.getItem('metodePembayaran');
+document.getElementById('metode').textContent = metode ?? 'Belum dipilih';
+
+window.addEventListener('load', function () {
+  setTimeout(function () {
+    window.print();
+  }, 500);
+});
+</script>
+</body>
+</html>
